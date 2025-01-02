@@ -1,0 +1,17 @@
+@BASE_URL=http://localhost:3000
+### method get
+GET {{BASE_URL}}/
+### method post
+POST {{BASE_URL}}/data
+Content-Type: application/json
+{
+  "name":"Pojok Code"
+}
+### method put
+PUT {{BASE_URL}}/update
+Content-Type: application/json
+{
+  "name":"Pojok Code"
+}
+### method Delete
+DELETE {{BASE_URL}}/delete/1001
