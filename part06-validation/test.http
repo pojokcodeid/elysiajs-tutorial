@@ -1,0 +1,10 @@
+### form data
+POST http://localhost:3000/submit-form
+Content-Type: application/json
+{
+  "name":"PCode",
+  "age":0
+}
+
+### response
+POST http://localhost:3000/submit-form
