@@ -81,9 +81,7 @@ class AuthController {
 
                     const errors = fields
                       .filter((field) =>
-                        error.all.some(
-                          (e) => "path" in e && e.path === field.path
-                        )
+                        error.all.some((e) => e.path === field.path)
                       )
                       .map((field) => ({
                         field: field.field,
@@ -286,9 +284,7 @@ class AuthController {
 
                     const errors = fields
                       .filter((field) =>
-                        error.all.some(
-                          (e) => "path" in e && e.path === field.path
-                        )
+                        error.all.some((e) => e.path === field.path)
                       )
                       .map((field) => ({
                         field: field.field,
