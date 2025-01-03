@@ -8,7 +8,7 @@ export const isAdminMiddleware = (app: Elysia) => {
       jwt({
         name: "jwt",
         secret: Bun.env.JWT_SECRET!,
-      })
+      }),
     )
     .derive(async ({ jwt, set, headers }) => {
       const bearer = headers.authorization?.split(" ")[1];

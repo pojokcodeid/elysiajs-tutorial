@@ -177,7 +177,7 @@ class UserController {
                 },
               },
             },
-          }
+          },
         )
         .put(
           "/update/:id",
@@ -197,13 +197,13 @@ class UserController {
             const id = jwtPayload.id;
             const findUser = UserModel.findById(id as number) as User;
 
-            if (findUser.isAdmin && Number(params.id) !== null) {
+            if (findUser.isAdmin && !isNaN(Number(params.id))) {
               UserModel.updateOrCreate(
                 body.name,
                 body.email,
                 body.isAdmin,
                 Number(params.id),
-                undefined
+                undefined,
               );
 
               return {
@@ -231,7 +231,7 @@ class UserController {
                   body.email,
                   false,
                   Number(params.id),
-                  password
+                  password,
                 );
 
                 return {
@@ -244,7 +244,7 @@ class UserController {
                   body.email,
                   false,
                   Number(params.id),
-                  undefined
+                  undefined,
                 );
 
                 return {
@@ -276,7 +276,7 @@ class UserController {
             }),
             error({ code, error }) {
               switch (code) {
-                case "VALIDATION":
+                case "VALIDATION": {
                   const fields = [
                     {
                       path: "/name",
@@ -313,8 +313,8 @@ class UserController {
                   const errors = fields
                     .filter((field) =>
                       error.all.some(
-                        (e) => "path" in e && e.path === field.path
-                      )
+                        (e) => "path" in e && e.path === field.path,
+                      ),
                     )
                     .map((field) => ({
                       field: field.field,
@@ -326,6 +326,7 @@ class UserController {
                     message: "Invalid request.",
                     errors: errors,
                   };
+                }
               }
             },
             detail: {
@@ -470,7 +471,7 @@ class UserController {
                 },
               },
             },
-          }
+          },
         )
         .guard((app) =>
           app
@@ -600,7 +601,7 @@ class UserController {
                     },
                   },
                 },
-              }
+              },
             )
             .get(
               "/",
@@ -727,9 +728,9 @@ class UserController {
                     },
                   },
                 },
-              }
-            )
-        )
+              },
+            ),
+        ),
     );
   }
 }

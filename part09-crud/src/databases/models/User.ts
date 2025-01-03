@@ -3,7 +3,7 @@ import db from "../db";
 class UserModel {
   static getAll() {
     const query = db.query(
-      "SELECT id, name, email, isAdmin, isActive, created_at, updated_at FROM users"
+      "SELECT id, name, email, isAdmin, isActive, created_at, updated_at FROM users",
     );
 
     return query.all();
@@ -11,7 +11,7 @@ class UserModel {
 
   static findById(id: number) {
     const query = db.query(
-      "SELECT id, name, email, isAdmin, isActive, created_at, updated_at FROM users WHERE id = ?"
+      "SELECT id, name, email, isAdmin, isActive, created_at, updated_at FROM users WHERE id = ?",
     );
 
     return query.get(id);
@@ -28,26 +28,26 @@ class UserModel {
     email: string,
     isAdmin: boolean,
     id?: number,
-    password?: string
+    password?: string,
   ) {
     if (id) {
       const updatedAt = new Date().toISOString();
       if (password !== undefined) {
         const query = db.query(
-          "UPDATE users SET password = ?, updated_at = ? WHERE id = ?"
+          "UPDATE users SET password = ?, updated_at = ? WHERE id = ?",
         );
 
         return query.run(password as string, updatedAt, id);
       } else {
         const query = db.query(
-          "UPDATE users SET name = ?, email = ?, isAdmin = ?, updated_at = ? WHERE id = ?"
+          "UPDATE users SET name = ?, email = ?, isAdmin = ?, updated_at = ? WHERE id = ?",
         );
 
         return query.run(name, email, isAdmin, updatedAt, id);
       }
     } else {
       const query = db.query(
-        "INSERT INTO users (name, email, password, isAdmin) VALUES (?, ?, ?, ?)"
+        "INSERT INTO users (name, email, password, isAdmin) VALUES (?, ?, ?, ?)",
       );
       query.run(name, email, password as string, isAdmin);
 

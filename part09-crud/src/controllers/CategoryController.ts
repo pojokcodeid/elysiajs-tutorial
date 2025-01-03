@@ -87,7 +87,7 @@ class CategoryController {
                 },
               },
             },
-          }
+          },
         )
         .guard((app) =>
           app
@@ -119,7 +119,7 @@ class CategoryController {
                 }),
                 error({ code, error }) {
                   switch (code) {
-                    case "VALIDATION":
+                    case "VALIDATION": {
                       const fields = [
                         {
                           path: "/title",
@@ -136,8 +136,8 @@ class CategoryController {
                       const errors = fields
                         .filter((field) =>
                           error.all.some(
-                            (e) => "path" in e && e.path === field.path
-                          )
+                            (e) => "path" in e && e.path === field.path,
+                          ),
                         )
                         .map((field) => ({
                           field: field.field,
@@ -149,6 +149,7 @@ class CategoryController {
                         message: "Invalid request.",
                         errors: errors,
                       };
+                    }
                   }
                 },
                 detail: {
@@ -246,13 +247,13 @@ class CategoryController {
                     },
                   },
                 },
-              }
+              },
             )
             .put(
               "/update/:id",
               ({ body, params, set }) => {
                 const category = CategoryModel.findById(
-                  Number(params.id)
+                  Number(params.id),
                 ) as Category;
 
                 if (!category) {
@@ -285,7 +286,7 @@ class CategoryController {
                 }),
                 error({ code, error }) {
                   switch (code) {
-                    case "VALIDATION":
+                    case "VALIDATION": {
                       const fields = [
                         {
                           path: "/title",
@@ -302,8 +303,8 @@ class CategoryController {
                       const errors = fields
                         .filter((field) =>
                           error.all.some(
-                            (e) => "path" in e && e.path === field.path
-                          )
+                            (e) => "path" in e && e.path === field.path,
+                          ),
                         )
                         .map((field) => ({
                           field: field.field,
@@ -315,6 +316,7 @@ class CategoryController {
                         message: "Invalid request.",
                         errors: errors,
                       };
+                    }
                   }
                 },
                 detail: {
@@ -449,13 +451,13 @@ class CategoryController {
                     },
                   },
                 },
-              }
+              },
             )
             .delete(
               "/delete/:id",
               ({ params, set }) => {
                 const category = CategoryModel.findById(
-                  Number(params.id)
+                  Number(params.id),
                 ) as Category;
 
                 if (!category) {
@@ -595,9 +597,9 @@ class CategoryController {
                     },
                   },
                 },
-              }
-            )
-        )
+              },
+            ),
+        ),
     );
   }
 }

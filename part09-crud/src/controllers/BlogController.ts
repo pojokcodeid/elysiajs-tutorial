@@ -104,7 +104,7 @@ class BlogController {
                 },
               },
             },
-          }
+          },
         )
         .get(
           "/category/:id",
@@ -229,7 +229,7 @@ class BlogController {
                 },
               },
             },
-          }
+          },
         )
         .get(
           "/:id",
@@ -354,7 +354,7 @@ class BlogController {
                 },
               },
             },
-          }
+          },
         )
         .guard((app) =>
           app
@@ -371,7 +371,7 @@ class BlogController {
               "/create",
               async ({ jwt, body, headers }) => {
                 const category = CategoryModel.findById(
-                  Number(body.categoryId)
+                  Number(body.categoryId),
                 ) as Category;
 
                 if (!category) {
@@ -399,7 +399,7 @@ class BlogController {
                   body.imageUrl,
                   body.content,
                   id as number,
-                  undefined
+                  undefined,
                 );
 
                 return {
@@ -428,7 +428,7 @@ class BlogController {
                 }),
                 error({ code, error }) {
                   switch (code) {
-                    case "VALIDATION":
+                    case "VALIDATION": {
                       const fields = [
                         {
                           path: "/title",
@@ -460,8 +460,8 @@ class BlogController {
                       const errors = fields
                         .filter((field) =>
                           error.all.some(
-                            (e) => "path" in e && e.path === field.path
-                          )
+                            (e) => "path" in e && e.path === field.path,
+                          ),
                         )
                         .map((field) => ({
                           field: field.field,
@@ -473,6 +473,7 @@ class BlogController {
                         message: "Invalid request.",
                         errors: errors,
                       };
+                    }
                   }
                 },
                 detail: {
@@ -590,7 +591,7 @@ class BlogController {
                     },
                   },
                 },
-              }
+              },
             )
             .put(
               "/update/:id",
@@ -609,7 +610,7 @@ class BlogController {
 
                 const id = jwtPayload.id;
                 const findBlog = BlogModel.findById(
-                  Number(params.id) as number
+                  Number(params.id) as number,
                 ) as Blog;
 
                 if (!findBlog) {
@@ -636,7 +637,7 @@ class BlogController {
                   body.imageUrl,
                   body.content,
                   id as number,
-                  Number(params.id)
+                  Number(params.id),
                 );
 
                 return {
@@ -670,7 +671,7 @@ class BlogController {
                 }),
                 error({ code, error }) {
                   switch (code) {
-                    case "VALIDATION":
+                    case "VALIDATION": {
                       const fields = [
                         {
                           path: "/title",
@@ -702,8 +703,8 @@ class BlogController {
                       const errors = fields
                         .filter((field) =>
                           error.all.some(
-                            (e) => "path" in e && e.path === field.path
-                          )
+                            (e) => "path" in e && e.path === field.path,
+                          ),
                         )
                         .map((field) => ({
                           field: field.field,
@@ -715,6 +716,7 @@ class BlogController {
                         message: "Invalid request.",
                         errors: errors,
                       };
+                    }
                   }
                 },
                 detail: {
@@ -869,7 +871,7 @@ class BlogController {
                     },
                   },
                 },
-              }
+              },
             )
             .delete(
               "/delete/:id",
@@ -888,7 +890,7 @@ class BlogController {
 
                 const id = jwtPayload.id;
                 const findBlog = BlogModel.findById(
-                  Number(params.id) as number
+                  Number(params.id) as number,
                 ) as Blog;
 
                 if (!findBlog) {
@@ -992,9 +994,9 @@ class BlogController {
                     },
                   },
                 },
-              }
-            )
-        )
+              },
+            ),
+        ),
     );
   }
 }

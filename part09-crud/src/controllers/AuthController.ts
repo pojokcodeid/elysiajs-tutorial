@@ -9,7 +9,7 @@ class AuthController {
         jwt({
           name: "jwt",
           secret: Bun.env.JWT_SECRET!,
-        })
+        }),
       )
       .group("/auth", (app) =>
         app
@@ -29,7 +29,7 @@ class AuthController {
               const matchPassword = await Bun.password.verify(
                 body.password,
                 findUser.password,
-                "bcrypt"
+                "bcrypt",
               );
 
               if (!matchPassword) {
@@ -60,7 +60,7 @@ class AuthController {
               }),
               error({ code, error }) {
                 switch (code) {
-                  case "VALIDATION":
+                  case "VALIDATION": {
                     const fields = [
                       {
                         path: "/email",
@@ -82,8 +82,8 @@ class AuthController {
                     const errors = fields
                       .filter((field) =>
                         error.all.some(
-                          (e) => "path" in e && e.path === field.path
-                        )
+                          (e) => "path" in e && e.path === field.path,
+                        ),
                       )
                       .map((field) => ({
                         field: field.field,
@@ -95,6 +95,7 @@ class AuthController {
                       message: "Invalid request.",
                       errors: errors,
                     };
+                  }
                 }
               },
               detail: {
@@ -202,7 +203,7 @@ class AuthController {
                   },
                 },
               },
-            }
+            },
           )
           .post(
             "/register",
@@ -227,7 +228,7 @@ class AuthController {
                 body.email,
                 false,
                 undefined,
-                password
+                password,
               ) as User;
 
               return {
@@ -255,7 +256,7 @@ class AuthController {
               }),
               error({ code, error }) {
                 switch (code) {
-                  case "VALIDATION":
+                  case "VALIDATION": {
                     const fields = [
                       {
                         path: "/email",
@@ -287,8 +288,8 @@ class AuthController {
                     const errors = fields
                       .filter((field) =>
                         error.all.some(
-                          (e) => "path" in e && e.path === field.path
-                        )
+                          (e) => "path" in e && e.path === field.path,
+                        ),
                       )
                       .map((field) => ({
                         field: field.field,
@@ -300,6 +301,7 @@ class AuthController {
                       message: "Invalid request.",
                       errors: errors,
                     };
+                  }
                 }
               },
               detail: {
@@ -412,8 +414,8 @@ class AuthController {
                   },
                 },
               },
-            }
-          )
+            },
+          ),
       );
   }
 }

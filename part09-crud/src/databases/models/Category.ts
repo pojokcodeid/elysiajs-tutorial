@@ -23,7 +23,7 @@ class CategoryModel {
     if (id) {
       const updatedAt = new Date().toISOString();
       const query = db.query(
-        "UPDATE catagories SET title = ?, updated_at = ? WHERE id = ?"
+        "UPDATE catagories SET title = ?, updated_at = ? WHERE id = ?",
       );
 
       return query.run(title, updatedAt, id);

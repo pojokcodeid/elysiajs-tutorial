@@ -36,7 +36,7 @@ new Elysia()
       swaggerOptions: {
         persistAuthorization: true,
       },
-    })
+    }),
   )
   .use(AuthController)
   .use(CategoryController)

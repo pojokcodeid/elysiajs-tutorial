@@ -5,7 +5,7 @@ class BlogModel {
     const query = db.query(
       `SELECT blogs.*, users.name AS author FROM blogs
             JOIN users ON blogs.userId = users.id
-            WHERE users.isActive = TRUE`
+            WHERE users.isActive = TRUE`,
     );
 
     return query.all();
@@ -21,7 +21,7 @@ class BlogModel {
     const query = db.query(
       `SELECT blogs.*, users.name AS author FROM blogs
             JOIN users ON blogs.userId = users.id
-            WHERE categoryId = ? AND users.isActive = TRUE`
+            WHERE categoryId = ? AND users.isActive = TRUE`,
     );
 
     return query.all(categoryId);
@@ -39,17 +39,17 @@ class BlogModel {
     imageUrl: string,
     content: string,
     userId?: number,
-    id?: number
+    id?: number,
   ) {
     if (id) {
       const query = db.query(
-        "UPDATE blogs SET categoryId = ?, title = ?, imageUrl = ?, content = ? WHERE id = ?"
+        "UPDATE blogs SET categoryId = ?, title = ?, imageUrl = ?, content = ? WHERE id = ?",
       );
 
       return query.run(categoryId, title, imageUrl, content, id);
     } else {
       const query = db.query(
-        "INSERT INTO blogs (categoryId, title, imageUrl, content, userId) VALUES (?, ?, ?, ?, ?)"
+        "INSERT INTO blogs (categoryId, title, imageUrl, content, userId) VALUES (?, ?, ?, ?, ?)",
       );
 
       return query.run(categoryId, title, imageUrl, content, userId as number);
