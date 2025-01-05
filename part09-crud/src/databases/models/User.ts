@@ -51,7 +51,9 @@ class UserModel {
       );
       query.run(name, email, password as string, isAdmin);
 
-      return db.query("SELECT id from users WHERE email = ?").get(email);
+      return db
+        .query("SELECT id, name, email, isAdmin from users WHERE email = ?")
+        .get(email);
     }
   }
 

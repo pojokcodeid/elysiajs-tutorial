@@ -43,7 +43,12 @@ class AuthController {
               return {
                 success: true,
                 message: "Login successful.",
-                token: await jwt.sign({ id: findUser.id }),
+                data: {
+                  id: findUser.id,
+                  email: findUser.email,
+                  name: findUser.name,
+                  token: await jwt.sign({ id: findUser.id }),
+                },
               };
             },
             {
@@ -234,7 +239,12 @@ class AuthController {
               return {
                 success: true,
                 message: "User registered successfully.",
-                token: await jwt.sign({ id: registerUser.id }),
+                data: {
+                  id: registerUser.id,
+                  name: registerUser.name,
+                  email: registerUser.email,
+                  token: await jwt.sign({ id: registerUser.id }),
+                },
               };
             },
             {

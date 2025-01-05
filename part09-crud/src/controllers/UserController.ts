@@ -229,7 +229,7 @@ class UserController {
                 UserModel.updateOrCreate(
                   body.name,
                   body.email,
-                  false,
+                  body.isAdmin,
                   Number(params.id),
                   password,
                 );
@@ -242,7 +242,7 @@ class UserController {
                 UserModel.updateOrCreate(
                   body.name,
                   body.email,
-                  false,
+                  body.isAdmin,
                   Number(params.id),
                   undefined,
                 );

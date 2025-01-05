@@ -1,0 +1,21 @@
+### register user
+POST {{BASE_URL}}/api/auth/register
+Content-Type:application/json
+{
+  "email": "code@gmail.com",
+  "name": "Pojok Code",
+  "password": "12345678"
+}
+
+### login user
+POST {{BASE_URL}}/api/auth/login
+Content-Type:application/json
+{
+  "email": "code@gmail.com",
+  "password": "12345678"
+}
+
+{{
+  $global.token=JSON.parse(response.body).data.token;
+  $global.id=JSON.parse(response.body).data.id;
+}}

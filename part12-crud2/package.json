@@ -1,5 +1,5 @@
 {
-  "name": "part01-createproject",
+  "name": "part12-crud2",
   "version": "1.0.50",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,13 +10,17 @@
     "check-lint": "bunx eslint .",
     "check-format": "bunx prettier . --check",
     "build": "bun build ./src/index.ts --compile --minify --sourcemap --outfile dist/myapp",
-    "start": "bun run dist/myapp"
+    "start": "bun run dist/myapp",
+    "prepare": "husky"
   },
   "dependencies": {
     "@elysiajs/cors": "^1.2.0",
     "@elysiajs/jwt": "^1.2.0",
     "@elysiajs/swagger": "^1.2.0",
-    "elysia": "latest"
+    "@prisma/client": "^6.1.0",
+    "elysia": "latest",
+    "winston": "^3.17.0",
+    "winston-daily-rotate-file": "^5.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
@@ -29,6 +33,7 @@
     "globals": "^15.14.0",
     "husky": "^9.1.7",
     "prettier": "^3.4.2",
+    "prisma": "^6.1.0",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.19.0"
   },

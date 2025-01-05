@@ -1,0 +1,17 @@
+### update user
+PUT {{BASE_URL}}/api/users/update/1
+Content-Type:application/json
+Authorization: Bearer {{$global.token}}
+{
+  "name": "Pojok Code",
+  "email": "code@gmail.com",
+  "password": "12345678",
+  "isAdmin": true
+}
+### get user by id
+GET {{BASE_URL}}/api/users/get/1
+Authorization: Bearer {{$global.token}}
+
+### get all user
+GET {{BASE_URL}}/api/users/
+Authorization: Bearer {{$global.token}}

@@ -1,0 +1,31 @@
+### create todo
+POST {{BASE_URL}}/todos
+Authorization: Bearer {{$global.token}}
+Content-Type: application/json
+{
+  "title":"example todo",
+  "description":"ini adalah contoh descripsi",
+  "userId":1
+}
+
+### get all todo
+GET {{BASE_URL}}/todos
+Authorization: Bearer {{$global.token}}
+
+### get todo by id
+GET {{BASE_URL}}/todos/9
+Authorization: Bearer {{$global.token}}
+
+### update todos
+PUT {{BASE_URL}}/todos/9
+Authorization: Bearer {{$global.token}}
+Content-Type: application/json
+{
+  "title":"example todo",
+  "description":"ini adalah contoh descripsi",
+  "userId":1
+}
+
+### delete todos
+DELETE {{BASE_URL}}/todos/10
+Authorization: Bearer {{$global.token}}

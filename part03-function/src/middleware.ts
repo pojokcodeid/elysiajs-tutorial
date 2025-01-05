@@ -1,18 +1,28 @@
-import Elysia from "elysia";
+import Elysia, { Context } from "elysia";
+
+// Middleware untuk logging
+const loggerMiddleware = (app: Elysia) => {
+  return app.derive(() => {
+    console.log("Pesan dari middleware...........");
+  });
+};
 
 const app = new Elysia()
-  .get("/secure", ({ headers }) => {
+  .use(loggerMiddleware)
+  .onError(({ code, error, path }) => {
+    return {
+      status: code,
+      body: { error, path },
+    };
+  })
+  .get("/secure", ({ headers, error }) => {
     if (!headers["authorization"]) {
-      throw new Error("Unauthorized");
+      throw error(401, "Unauthorized");
     }
     return "Welcome to secure route!";
   })
-  .onError((error) => {
-    if (error instanceof Error) {
-      return `Error: ${error.message}`;
-    } else {
-      return `Error: ${String(error)}`;
-    }
+  .get("/error", ({ error }) => {
+    throw error(500, "tERJADI KESALAHAN, Internal Server Error");
   })
   .listen(3000);
 
